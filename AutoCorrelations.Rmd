@@ -1,0 +1,43 @@
+---
+title: "Auto Correlations"
+output: html_document
+---
+
+
+```{r}
+##chapter4-1 自己回帰モデルの当てはめ残差を調べる
+
+par(mfcol=c(2,1))
+plot(data.log.return$x9041,type="l",ylab="Return")
+plot(data.log.return$x9042,type="l",ylab="Return")
+ar.fit1= ar(data.log.return$x9041)
+ar.fit1
+
+ar.fit2<- ar(data.log.return$x9042)
+ar.fit2
+
+acf(data.log.return$x9041)
+acf(data.log.return$x9042)
+
+acf(ar.fit1$resid[-1])
+acf(ar.fit2$resid[-1])
+
+ar(ar.fit1$resid[-1])$order
+ar(ar.fit2$resid[-1])$order
+Box.test(ar.fit1$resid[-1],type="L")
+
+acf(ar.fit1$resid[-1]^2)
+acf(ar.fit2$resid[-1]^2)
+
+ar(ar.fit1$resid[-1]^2)
+
+ar(ar.fit2$resid[-1]^2)
+
+Box.test(ar.fit1$resid[-1]^2,type="L")
+
+
+##chapter4-2 ARCH model and GARCH model
+
+
+```
+
